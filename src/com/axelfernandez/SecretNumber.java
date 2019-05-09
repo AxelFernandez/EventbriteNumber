@@ -14,7 +14,7 @@ public class SecretNumber {
         this.secretNumber = getRandomNumber();
     }
 
-    private int getSecretNumber() {
+    public int getSecretNumber() {
         return secretNumber;
     }
 
@@ -34,13 +34,4 @@ public class SecretNumber {
         return secretNumber;
     }
 
-    protected List analyzeAttempt(int attempt){
-        List result = new ArrayList();
-
-
-
-
-
-        return result;
-    }
 }

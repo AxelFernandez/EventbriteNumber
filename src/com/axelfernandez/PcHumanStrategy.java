@@ -3,15 +3,69 @@ package com.axelfernandez;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
-public class PcHumanStrategy implements GameStrategy {
+/**
+ * In this class the Pc think a number, and the Human must guess the number
+ * */
+public class PcHumanStrategy extends AbstractEstrategy {
 
+    SecretNumber secretNumber;
+    Scanner scanner;
+    public PcHumanStrategy() {
+        scanner = new Scanner(System.in);
+    }
+
+    /**
+    *This method generate a Random Number
+    **/
+    @Override
+    public void StartGame() {
+        secretNumber = new SecretNumber();
+        System.out.println("Random number is generated, Try one");
+    }
 
     @Override
-    public List analyceAttempt(int attempt) {
-        List result = new ArrayList();
-        result.add("pc humano test");
-        System.out.println("PC humano test");
-        return  result;
+    public void analyceAttempt(Integer number) {
+        int goodAttempt = 0;
+        int regularAttempt = 0;
+        String secret =String.valueOf(secretNumber.getSecretNumber());
+        for (int i =0; i<number.toString().length();i++){
+            char iChar = number.toString().charAt(i);
+
+            for (int j = 0; j<number.toString().length();j++){
+                char jChar = secret.charAt(j);
+
+                if (i==j && iChar == jChar){
+                    goodAttempt++;
+                }else if (iChar == jChar){
+                    regularAttempt++;
+
+                }
+
+            }
+
+       }
+
+        System.out.println(goodAttempt+"Good "+regularAttempt+"Regular");
+    }
+
+    @Override
+    public void sendAttempt() {
+        System.out.println(secretNumber.getSecretNumber());
+
+        String attempt = scanner.next();
+        if (validateNumber(attempt)){
+            analyceAttempt(new Integer(attempt));
+
+        }else{
+            System.out.println("Invalid Number!");
+        }
+
+    }
+
+    @Override
+    public boolean isresult() {
+        return false;
     }
 }

@@ -10,6 +10,7 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         int optionStrategy = scanner.nextInt();
         Game game = new Game(FactoryStrategy.getInstance().getGameStrategy(optionStrategy));
-        game.analyze(1);
+        game.StartGame();
+
     }
 }

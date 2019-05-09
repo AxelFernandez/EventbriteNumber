@@ -4,7 +4,14 @@ import java.util.List;
 
 public interface GameStrategy {
 
-    List analyceAttempt(int attempt);
+    void StartGame();
 
+    void analyceAttempt(Integer number);
+
+    void sendAttempt();
+
+    boolean isresult();
+
+    boolean validateNumber(String number);
 
 }
