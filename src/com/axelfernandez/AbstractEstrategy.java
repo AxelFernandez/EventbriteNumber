@@ -8,7 +8,9 @@ public abstract class AbstractEstrategy implements GameStrategy {
     public boolean validateNumber(String number) {
         boolean result = true;
         try {
-            new Integer(number);
+            if (SecretNumber.isDigitRepeat(new Integer(number))){
+                result = false;
+            }
         } catch (InputMismatchException e) {
             result = false;
         }

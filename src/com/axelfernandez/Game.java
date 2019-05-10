@@ -11,8 +11,6 @@ public class Game {
     }
 
 
-
-
     public void StartGame(){
         issolved = false;
         gameStrategy.StartGame();

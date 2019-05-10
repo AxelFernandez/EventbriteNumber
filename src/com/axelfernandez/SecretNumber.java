@@ -28,10 +28,44 @@ public class SecretNumber {
      */
     private int getRandomNumber(){
         int secretNumber= 0;
-        while (secretNumber < 1000){
+        boolean isValidated = false;
+        while (isValidated == false){
             secretNumber = (int) (Math.random() * 9999);
+            isValidated = validateNumber(secretNumber);
         }
         return secretNumber;
     }
+
+    private boolean validateNumber(Integer secretNumber){
+        boolean result = true;
+        if (secretNumber < 1000){
+            result = false;
+        }
+        if (isDigitRepeat(secretNumber)){
+            result = false;
+
+        }
+
+        return result;
+    }
+    
+    public static boolean isDigitRepeat(Integer number){
+        boolean result = false;
+        for (int i =0; i<number.toString().length();i++) {
+            char iChar = number.toString().charAt(i);
+            for (int j = 0; j < number.toString().length(); j++) {
+                char jChar = number.toString().charAt(j);
+                if (i != j && iChar == jChar) {
+                    result = true;
+
+                }
+
+            }
+        }
+
+        return result;
+
+    }
+
 
 }

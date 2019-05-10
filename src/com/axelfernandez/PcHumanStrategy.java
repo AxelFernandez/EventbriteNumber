@@ -1,8 +1,7 @@
 package com.axelfernandez;
 
 
-import java.util.ArrayList;
-import java.util.List;
+
 import java.util.Scanner;
 
 /**
@@ -11,6 +10,7 @@ import java.util.Scanner;
 public class PcHumanStrategy extends AbstractEstrategy {
 
     SecretNumber secretNumber;
+    Integer attempt;
     Scanner scanner;
     public PcHumanStrategy() {
         scanner = new Scanner(System.in);
@@ -29,6 +29,7 @@ public class PcHumanStrategy extends AbstractEstrategy {
     public void analyceAttempt(Integer number) {
         int goodAttempt = 0;
         int regularAttempt = 0;
+        attempt = number;
         String secret =String.valueOf(secretNumber.getSecretNumber());
         for (int i =0; i<number.toString().length();i++){
             char iChar = number.toString().charAt(i);
@@ -47,13 +48,11 @@ public class PcHumanStrategy extends AbstractEstrategy {
 
        }
 
-        System.out.println(goodAttempt+"Good "+regularAttempt+"Regular");
+        System.out.println(goodAttempt+" Good "+regularAttempt+" Regular");
     }
 
     @Override
     public void sendAttempt() {
-        System.out.println(secretNumber.getSecretNumber());
-
         String attempt = scanner.next();
         if (validateNumber(attempt)){
             analyceAttempt(new Integer(attempt));
@@ -66,6 +65,12 @@ public class PcHumanStrategy extends AbstractEstrategy {
 
     @Override
     public boolean isresult() {
-        return false;
+        boolean result = false;
+        if (attempt != null){
+            if (attempt == secretNumber.getSecretNumber()){
+                result = true;
+            }
+        }
+        return result;
     }
 }
