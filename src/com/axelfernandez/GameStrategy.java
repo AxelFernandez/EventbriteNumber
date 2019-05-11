@@ -2,15 +2,18 @@ package com.axelfernandez;
 
 import java.util.List;
 
+/**
+ * Interface with all step must be aplicated in different algoritmic
+ * */
 public interface GameStrategy {
 
     void StartGame();
 
-    void analyceAttempt(Integer number);
+    void analyzeAttempt(Integer number);
 
     void sendAttempt();
 
-    boolean isresult();
+    boolean isResult();
 
     boolean validateNumber(String number);
 

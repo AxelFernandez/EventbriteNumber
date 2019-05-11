@@ -1,7 +1,5 @@
 package com.axelfernandez;
 
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * This class get a Random Number
@@ -18,12 +16,14 @@ public class SecretNumber {
         return secretNumber;
     }
 
-    private void setSecretNumber() {
-        this.secretNumber = getRandomNumber();
+    public void setSecretNumber(int secretNumber) {
+        this.secretNumber = secretNumber;
     }
-
+    public void setSecretNumber(){
+        this.setSecretNumber(getRandomNumber());
+    }
     /**
-     * Get a four cifres number, if the number is less than 1000, it call herself again
+     * Get a four cifres number, and validate
      * @return number in range from 1000 to 9999
      */
     private int getRandomNumber(){
@@ -36,6 +36,11 @@ public class SecretNumber {
         return secretNumber;
     }
 
+    /**
+     * This method put a number in test, fist if is less than 1000 and after if the digit is not repeat
+     * @param secretNumber that came from the getRandomNumber()
+     * @return true if it pass all the test
+     */
     private boolean validateNumber(Integer secretNumber){
         boolean result = true;
         if (secretNumber < 1000){
@@ -48,7 +53,12 @@ public class SecretNumber {
 
         return result;
     }
-    
+
+    /**
+     * Static method, this validate if the number repeat a digit
+     * @param number
+     * @return true if repeat, false if all digit are diferent.
+     */
     public static boolean isDigitRepeat(Integer number){
         boolean result = false;
         for (int i =0; i<number.toString().length();i++) {

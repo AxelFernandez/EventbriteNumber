@@ -1,5 +1,9 @@
 package com.axelfernandez;
 
+
+/**
+ * This Factory create instances of especific strategy
+ * */
 public class FactoryStrategy {
     private static FactoryStrategy factoryStrategy;
 
@@ -11,9 +15,13 @@ public class FactoryStrategy {
     }
 
     public GameStrategy getGameStrategy(int option){
-        GameStrategy result = null;
+        GameStrategy result;
         if (option == 1){
            result = new PcHumanStrategy();
+        }else if (option == 2){
+            result = new HumanPcStrategy();
+        }else{
+            result = new PcHumanStrategy();
         }
 
         return result;

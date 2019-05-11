@@ -1,5 +1,7 @@
 package com.axelfernandez;
-
+/**
+ * This class Start a game and gets a especific strategy to play
+ * */
 public class Game {
 
     GameStrategy gameStrategy;
@@ -14,12 +16,9 @@ public class Game {
     public void StartGame(){
         issolved = false;
         gameStrategy.StartGame();
-        while (issolved==false){
+        while (issolved==false){//infinite until is solved
             gameStrategy.sendAttempt();
-            issolved = gameStrategy.isresult();
-
-
+            issolved = gameStrategy.isResult();
         }
-
     }
 }
