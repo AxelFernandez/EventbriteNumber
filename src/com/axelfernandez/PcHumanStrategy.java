@@ -1,6 +1,8 @@
 package com.axelfernandez;
 
 
+import java.util.List;
+
 /**
  * In this class the Pc think a number, and the Human must guess the number
  * */
@@ -22,7 +24,9 @@ public class PcHumanStrategy extends AbstractStrategy {
     public void sendAttempt() {
         String attempt = scanner.next();
         if (validateNumber(attempt)){
-            analyzeAttempt(new Integer(attempt));
+           List attemptList = analyzeAttempt(new Integer(attempt));
+            System.out.println(attemptList.get(0)+" Good "+attemptList.get(1)+" Regular");
+
         }else{
             System.out.println("Invalid Number!");
         }

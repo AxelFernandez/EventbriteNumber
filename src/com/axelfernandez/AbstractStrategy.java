@@ -1,5 +1,7 @@
 package com.axelfernandez;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -42,7 +44,8 @@ public abstract class AbstractStrategy implements GameStrategy {
      * @param number
      */
     @Override
-    public void analyzeAttempt(Integer number) {
+    public List analyzeAttempt(Integer number) {
+        List result = new ArrayList();
         int goodAttempt = 0;
         int regularAttempt = 0;
         attempt = number;
@@ -63,8 +66,9 @@ public abstract class AbstractStrategy implements GameStrategy {
             }
 
         }
-
-        System.out.println(goodAttempt+" Good "+regularAttempt+" Regular");
+        result.add(goodAttempt);
+        result.add(regularAttempt);
+        return result;
 
     }
 

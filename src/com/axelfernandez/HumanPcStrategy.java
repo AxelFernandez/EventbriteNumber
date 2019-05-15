@@ -37,7 +37,8 @@ public class HumanPcStrategy extends AbstractStrategy {
     @Override
     public void sendAttempt() {
         if (isvalidNumber){
-            analyzeAttempt(thinkNumber());
+            List attempt = analyzeAttempt(thinkNumber());
+            System.out.println(attempt.get(0)+" Good "+attempt.get(1)+" Regular");
             System.out.println("Attempt number: "+ attemptNumber);
         }
 

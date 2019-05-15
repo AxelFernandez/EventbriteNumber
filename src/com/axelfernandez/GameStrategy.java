@@ -9,7 +9,7 @@ public interface GameStrategy {
 
     void StartGame();
 
-    void analyzeAttempt(Integer number);
+    List analyzeAttempt(Integer number);
 
     void sendAttempt();
 
