@@ -2,7 +2,7 @@ package com.axelfernandez;
 
 
 /**
- * This Factory create instances of especific strategy
+ * This Factory creates instances of specific strategy
  * */
 public class FactoryStrategy {
     private static FactoryStrategy factoryStrategy;

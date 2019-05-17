@@ -1,34 +1,49 @@
 package com.axelfernandez;
 
-import org.junit.jupiter.api.Test;
+
+import org.junit.Assert;
+import org.junit.Test;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-class AbstractStrategyTest {
+/**
+ * This test a strategy common method
+ */
+ public class AbstractStrategyTest {
     AbstractStrategy abstractStrategy = new HumanPcStrategy();
 
+    /**
+     * Test all variant of number
+     */
     @Test
-    void validateNumber() {
-    boolean result =  abstractStrategy.validateNumber("2314");
-    assertTrue(result);
+    public void validateNumber() {
+        boolean result =  abstractStrategy.validateNumber("2314");
+        Assert.assertTrue(result);
 
-    result = abstractStrategy.validateNumber("1111");
-    assertFalse(result);
+        result = abstractStrategy.validateNumber("1111");
+        Assert.assertFalse(result);
 
-    result = abstractStrategy.validateNumber("number");
-    assertFalse(result);
+        result = abstractStrategy.validateNumber("number");
+        Assert.assertFalse(result);
 
-    result = abstractStrategy.validateNumber("12345");
-    assertFalse(result);
+        result = abstractStrategy.validateNumber("12345");
+        Assert.assertFalse(result);
     }
 
-    @Test
-    void analyzeAttempt() {
+    /**
+     * Test a correct Number
+     */
+   @Test
+   public void analyzeAttempt() {
         List result;
-       int number = abstractStrategy.secretNumber.getSecretNumber();
+        int number = abstractStrategy.secretNumber.getSecretNumber();
         result = abstractStrategy.analyzeAttempt(number);
-        //assertArrayEquals(String [0,4] ,[0,4]);
-    }
-}
+        int goodResult = (Integer) result.get(0);
+        int regularResult = (Integer) result.get(1);
+        Assert.assertEquals(4,goodResult);
+        Assert.assertEquals(0,regularResult);
+
+   }
+
+
+ }

@@ -1,6 +1,6 @@
 package com.axelfernandez;
 /**
- * This class Start a game and gets a especific strategy to play
+ * This class Start a game and gets a specific strategy to play
  * */
 public class Game {
 

@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- * This class implement GameStrategy and just override one method default in all especific strategy
+ * This class implements GameStrategy and just override one method default in all specific strategy
  * */
 
 public abstract class AbstractStrategy implements GameStrategy {

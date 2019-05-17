@@ -1,17 +1,17 @@
 package com.axelfernandez;
 
-import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.Assert;
+import org.junit.Test;
 
-class SecretNumberTest {
+public class SecretNumberTest {
 
-    @Test
-    void isDigitRepeat() {
+   @Test
+   public void isDigitRepeat() {
         boolean result = SecretNumber.isDigitRepeat(2314);
-        assertFalse(result);
+       Assert.assertFalse(result);
 
         result = SecretNumber.isDigitRepeat(2222);
-        assertTrue(result);
+       Assert.assertTrue(result);
     }
 }

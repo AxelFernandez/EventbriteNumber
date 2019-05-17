@@ -3,7 +3,7 @@ package com.axelfernandez;
 import java.util.List;
 
 /**
- * Interface with all step must be aplicated in different algoritmic
+ * Interface with all step must be applied in different algorithm
  * */
 public interface GameStrategy {
 
