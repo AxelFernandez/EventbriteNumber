@@ -36,7 +36,8 @@ import java.util.List;
    @Test
    public void analyzeAttempt() {
         List result;
-        int number = abstractStrategy.secretNumber.getSecretNumber();
+        int number = 1234;
+        abstractStrategy.secretNumber.setSecretNumber(1234);
         result = abstractStrategy.analyzeAttempt(number);
         int goodResult = (Integer) result.get(0);
         int regularResult = (Integer) result.get(1);

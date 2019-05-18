@@ -1,17 +1,19 @@
 package com.axelfernandez;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  *This is the strategy when the human think a number and Pc try to figured it.
  */
 public class HumanPcStrategy extends AbstractStrategy {
     private boolean isvalidNumber;
-    List <Integer> triedNumbers;
+    Map<Integer,List> candidateMap;
     SecretNumber tryNumber ;
     int attemptNumber = 0;
-
+    List attempt;
 
     /**
      * Human think a number and save it in a SecretNumber object
@@ -19,7 +21,7 @@ public class HumanPcStrategy extends AbstractStrategy {
     @Override
     public void StartGame() {
         tryNumber = new SecretNumber();
-        triedNumbers = new ArrayList();
+        candidateMap = new HashMap<>();
         isvalidNumber = false;
         System.out.println("Write a number with four digit, and no repeat it");
         String number = scanner.next();
@@ -37,7 +39,7 @@ public class HumanPcStrategy extends AbstractStrategy {
     @Override
     public void sendAttempt() {
         if (isvalidNumber){
-            List attempt = analyzeAttempt(thinkNumber());
+            attempt = analyzeAttempt(secretNumber.getSecretNumber());
             System.out.println(attempt.get(0)+" Good "+attempt.get(1)+" Regular");
             System.out.println("Attempt number: "+ attemptNumber);
         }
@@ -50,44 +52,15 @@ public class HumanPcStrategy extends AbstractStrategy {
      */
     @Override
     public boolean isResult() {
-        boolean result =false;
-        System.out.println("Number Generated" + tryNumber.getSecretNumber());
-        System.out.println("-----------------------------");
-        if (isvalidNumber && secretNumber.getSecretNumber() == tryNumber.getSecretNumber()){
-            result = true;
-        }else {
-            triedNumbers.add(tryNumber.getSecretNumber());
-            attemptNumber++;
-        }
 
-        return result;
     }
 
     /**
      * Gets a valid number, if it was tried, take another
      * @return
      */
-    private int thinkNumber(){
-        boolean isvalid = false;
-        int result = 0;
-        while (isvalid==false){
-            if (triedNumbers.isEmpty()){
-                result = tryNumber.getSecretNumber();
-                isvalid = true;
-            }
-            for (Integer element : triedNumbers){
-                if (element.equals(tryNumber.getSecretNumber())){
-                    tryNumber.setSecretNumber();
-                    result = tryNumber.getSecretNumber();
-                }else{
-                    isvalid= true;
-                    result = tryNumber.getSecretNumber();
-                }
+    private int thinkNumber(List feedback){
 
-            }
-
-        }
-        return result;
     }
 
 
