@@ -24,7 +24,7 @@ public class PcHumanStrategy extends AbstractStrategy {
     public void sendAttempt() {
         String attempt = scanner.next();
         if (validateNumber(attempt)){
-           List attemptList = analyzeAttempt(new Integer(attempt));
+           List attemptList = analyzeAttempt(new Integer(attempt),secretNumber.getSecretNumber());
             System.out.println(attemptList.get(0)+" Good "+attemptList.get(1)+" Regular");
 
         }else{

@@ -44,12 +44,12 @@ public abstract class AbstractStrategy implements GameStrategy {
      * @param number
      */
     @Override
-    public List analyzeAttempt(Integer number) {
+    public List analyzeAttempt(Integer number, Integer secretNumber) {
         List result = new ArrayList();
         int goodAttempt = 0;
         int regularAttempt = 0;
         attempt = number;
-        String secret =String.valueOf(secretNumber.getSecretNumber());
+        String secret =String.valueOf(secretNumber);
         for (int i =0; i<number.toString().length();i++){
             char iChar = number.toString().charAt(i);
 

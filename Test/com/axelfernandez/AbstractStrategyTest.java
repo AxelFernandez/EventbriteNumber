@@ -37,8 +37,7 @@ import java.util.List;
    public void analyzeAttempt() {
         List result;
         int number = 1234;
-        abstractStrategy.secretNumber.setSecretNumber(1234);
-        result = abstractStrategy.analyzeAttempt(number);
+        result = abstractStrategy.analyzeAttempt(number,1234);
         int goodResult = (Integer) result.get(0);
         int regularResult = (Integer) result.get(1);
         Assert.assertEquals(4,goodResult);
