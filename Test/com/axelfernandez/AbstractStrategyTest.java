@@ -28,6 +28,9 @@ import java.util.List;
 
         result = abstractStrategy.validateNumber("12345");
         Assert.assertFalse(result);
+
+        result = abstractStrategy.validateNumber("9099");
+        Assert.assertFalse(result);
     }
 
     /**

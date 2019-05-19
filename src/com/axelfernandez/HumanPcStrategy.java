@@ -24,7 +24,7 @@ public class HumanPcStrategy extends AbstractStrategy {
         candidateMap = new HashMap<>();
         isvalidNumber = false;
         System.out.println("Write a number with four digit, and no repeat it");
-        String number = scanner.next();
+        String number = scanner.next();//TODO: what if stay a 4 cifres number
         if (validateNumber(number)){
             secretNumber.setSecretNumber(new Integer(number));
             isvalidNumber = true;
@@ -40,14 +40,16 @@ public class HumanPcStrategy extends AbstractStrategy {
     public void sendAttempt() {
         if (isvalidNumber){
             attempt = analyzeAttempt(tryNumber.getSecretNumber(),secretNumber.getSecretNumber());
-            while (attempt.get(0).equals(0)){
+            while (attempt.get(0).equals(0) && candidateMap.isEmpty()){
                 tryNumber.setSecretNumber();
                 attempt = analyzeAttempt(tryNumber.getSecretNumber(),secretNumber.getSecretNumber());
             }
+            // scanner.next();
+            int nextNumber  = thinkNumber(tryNumber.getSecretNumber(), attempt);
+            candidateMap.put(nextNumber,attempt);
+            tryNumber.setSecretNumber(nextNumber);
             System.out.println("We try "+ tryNumber.getSecretNumber()+" and we recommend this from the number "+ secretNumber.getSecretNumber()+" press enter to continue");
             System.out.println(attempt.get(0)+" Good "+attempt.get(1)+" Regular");
-            // scanner.next();
-            tryNumber.setSecretNumber(thinkNumber(tryNumber.getSecretNumber(),attempt));
         }
     }
 
@@ -66,46 +68,55 @@ public class HumanPcStrategy extends AbstractStrategy {
      */
     private int thinkNumber(int number,List<Integer> feedback){
         int result = 0;
-        if (!feedback.get(0).equals(4)){
-            candidateMap.put(number,feedback);
-            result = findNextNumberCandidate(number,feedback.get(0));
+        if (candidateMap.isEmpty()) {
+            result =number;
+        }else if (!feedback.get(0).equals(4)){
+            result = findNextNumberCandidate(number,feedback);
         }else{
+            System.out.println("You Win!");
             isresult = true;
         }
-
 
     return result;
     }
 
-    private int findNextNumberCandidate(int number, int goodAttempt){
-        int result = 0;
-        int nextNumber = 0;
-        while (goodAttempt != result){
-            nextNumber = number++;
-            if (nextNumber<9999){
-                nextNumber = 1234;
+    private int findNextNumberCandidate(int number, List feedback){
+        Integer nextNumber = number + 1;
+        boolean isValidateCandidate = false;
+        int goodAttempt = (Integer) feedback.get(0);
+        int regularAttempt = (Integer) feedback.get(1);
+
+        while (!isValidateCandidate){
+            while (!validateNumber(nextNumber.toString())){
+                nextNumber++;
+            }
+            //nextNumber++;
+            if (nextNumber>9999){
+                nextNumber= 1234;
             }
             List nextNumberFeedback = analyzeAttempt(number,nextNumber);
-            result = (int) nextNumberFeedback.get(0);
+            int goodAttemptfeedback = (int) nextNumberFeedback.get(0);
+            int regularAttemptfeedback = (int) nextNumberFeedback.get(1);
 
+            if (goodAttempt == goodAttemptfeedback && regularAttempt == regularAttemptfeedback){
+                isValidateCandidate = validateCandidate(nextNumber);
+
+            }else{
+                nextNumber++;
+            }
         }
-        if (validateCandidate(nextNumber)){
-            result = 1234;
-        }
-        System.out.println(result);
-
-
-        return result;
+        return nextNumber;
     }
 
     private boolean validateCandidate(int number){
-        boolean result = false;
+        boolean result = true;
         for (Map.Entry<Integer, List> entry : candidateMap.entrySet()) {
 
             List candidateFeedback = analyzeAttempt(number,entry.getKey());
-
-            if (candidateFeedback.get(0).equals(entry.getValue().get(0))){
-                result = true;
+            Integer goodAttempt =(Integer) candidateFeedback.get(0);
+            Integer regularAttempt =(Integer) candidateFeedback.get(1);
+            if (!goodAttempt.equals(entry.getValue().get(0)) && !regularAttempt.equals(entry.getValue().get(1)) && candidateMap.size()>1){
+                result = false;
             }
 
 
@@ -115,6 +126,15 @@ public class HumanPcStrategy extends AbstractStrategy {
 
     }
 
+    private boolean containNumber(int number){
+        boolean result = false;
 
+        for (Map.Entry<Integer, List> entry : candidateMap.entrySet()) {
+            if (entry.getKey().equals(number)) {
+                result= true;
+            }
+        }
+        return result;
+    }
 
 }
