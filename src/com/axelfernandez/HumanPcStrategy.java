@@ -28,6 +28,11 @@ public class HumanPcStrategy extends AbstractStrategy {
         if (validateNumber(number)){
             secretNumber.setSecretNumber(new Integer(number));
             isvalidNumber = true;
+            attempt = analyzeAttempt(tryNumber.getSecretNumber(),secretNumber.getSecretNumber());
+            while (attempt.get(0).equals(0)){
+                tryNumber.setSecretNumber();
+                attempt = analyzeAttempt(tryNumber.getSecretNumber(),secretNumber.getSecretNumber());
+            }
         }else {
             System.out.println("Invalid number!");
         }
@@ -39,15 +44,11 @@ public class HumanPcStrategy extends AbstractStrategy {
     @Override
     public void sendAttempt() {
         if (isvalidNumber){
-            attempt = analyzeAttempt(tryNumber.getSecretNumber(),secretNumber.getSecretNumber());
-            while (attempt.get(0).equals(0) && candidateMap.isEmpty()){
-                tryNumber.setSecretNumber();
-                attempt = analyzeAttempt(tryNumber.getSecretNumber(),secretNumber.getSecretNumber());
-            }
             // scanner.next();
             int nextNumber  = thinkNumber(tryNumber.getSecretNumber(), attempt);
             candidateMap.put(nextNumber,attempt);
             tryNumber.setSecretNumber(nextNumber);
+            attempt = analyzeAttempt(tryNumber.getSecretNumber(),secretNumber.getSecretNumber());
             System.out.println("We try "+ tryNumber.getSecretNumber()+" and we recommend this from the number "+ secretNumber.getSecretNumber()+" press enter to continue");
             System.out.println(attempt.get(0)+" Good "+attempt.get(1)+" Regular");
         }
@@ -89,17 +90,21 @@ public class HumanPcStrategy extends AbstractStrategy {
         while (!isValidateCandidate){
             while (!validateNumber(nextNumber.toString())){
                 nextNumber++;
+                if (nextNumber>9999){
+                    nextNumber= 1234;
+                }
             }
             //nextNumber++;
-            if (nextNumber>9999){
-                nextNumber= 1234;
-            }
             List nextNumberFeedback = analyzeAttempt(number,nextNumber);
             int goodAttemptfeedback = (int) nextNumberFeedback.get(0);
             int regularAttemptfeedback = (int) nextNumberFeedback.get(1);
 
+
             if (goodAttempt == goodAttemptfeedback && regularAttempt == regularAttemptfeedback){
                 isValidateCandidate = validateCandidate(nextNumber);
+                if (!isValidateCandidate){
+                    nextNumber++;
+                }
 
             }else{
                 nextNumber++;
@@ -111,30 +116,17 @@ public class HumanPcStrategy extends AbstractStrategy {
     private boolean validateCandidate(int number){
         boolean result = true;
         for (Map.Entry<Integer, List> entry : candidateMap.entrySet()) {
-
             List candidateFeedback = analyzeAttempt(number,entry.getKey());
             Integer goodAttempt =(Integer) candidateFeedback.get(0);
             Integer regularAttempt =(Integer) candidateFeedback.get(1);
-            if (!goodAttempt.equals(entry.getValue().get(0)) && !regularAttempt.equals(entry.getValue().get(1)) && candidateMap.size()>1){
+            if (!goodAttempt.equals(entry.getValue().get(0)) && !regularAttempt.equals(entry.getValue().get(1))){
                 result = false;
             }
-
-
         }
 
         return result;
 
     }
 
-    private boolean containNumber(int number){
-        boolean result = false;
-
-        for (Map.Entry<Integer, List> entry : candidateMap.entrySet()) {
-            if (entry.getKey().equals(number)) {
-                result= true;
-            }
-        }
-        return result;
-    }
 
 }
