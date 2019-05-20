@@ -54,8 +54,11 @@ public class HumanPcStrategy extends AbstractStrategy {
     @Override
     public boolean isResult() {
        if (!isresult){
+           String responseCheck= attempt.get(0) +","+attempt.get(1);
            System.out.println("We try "+ tryNumber.getSecretNumber()+" and we recommend this from the number "+ secretNumber.getSecretNumber());
            System.out.println(attempt.get(0)+" Good "+attempt.get(1)+" Regular");
+           System.out.println("Type "+responseCheck);
+           AnswerCheck(responseCheck);
            System.out.println("-----------------------------------------------------");
        }else {
            System.out.println("I Win!");
@@ -63,6 +66,17 @@ public class HumanPcStrategy extends AbstractStrategy {
        return isresult;
     }
 
+
+    private void AnswerCheck(String responseCheck){
+        String response = scanner.next();
+        if (!response.equals(responseCheck)){
+            System.out.println("Wrong Answer try again");
+            AnswerCheck(responseCheck);
+
+        }
+
+
+    }
     /**
      * Evaluate a number to try
      * @return A number to add in object tryNumber
