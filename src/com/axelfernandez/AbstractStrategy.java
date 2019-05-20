@@ -41,6 +41,8 @@ public abstract class AbstractStrategy implements GameStrategy {
     }
     /**
      * This Method analyze the number
+     * attempt index 0 = Good
+     * attempt index 1 = Regular
      * @param number
      */
     @Override

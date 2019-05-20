@@ -19,6 +19,8 @@ public class PcHumanStrategy extends AbstractStrategy {
 
     /**
      * Recive a attempt and call analyzeAttempt()
+     * attempt index 0 = Good
+     * Attempt index 1 = Regular
      */
     @Override
     public void sendAttempt() {
