@@ -24,10 +24,6 @@ public class HumanPcStrategy extends AbstractStrategy {
             secretNumber.setSecretNumber(new Integer(number));
             isvalidNumber = true;
             attempt = analyzeAttempt(tryNumber.getSecretNumber(),secretNumber.getSecretNumber());
-            while (attempt.get(0).equals(0)){
-                tryNumber.setSecretNumber();
-                attempt = analyzeAttempt(tryNumber.getSecretNumber(),secretNumber.getSecretNumber());
-            }
         }else {
             System.out.println("Invalid number!");
             StartGame();
